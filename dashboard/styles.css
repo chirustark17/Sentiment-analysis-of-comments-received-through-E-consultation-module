@@ -1,0 +1,94 @@
+:root {
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --text-main: #152238;
+  --text-muted: #6b778c;
+  --border: #dce4ef;
+}
+
+body {
+  background: linear-gradient(120deg, #eef3ff 0%, #f8fafc 60%, #eef9f8 100%);
+  color: var(--text-main);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.stat-card .card-body {
+  padding: 0.85rem 1rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stat-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.panel-card {
+  min-height: 280px;
+}
+
+.comment-scroll {
+  max-height: 430px;
+  overflow-y: auto;
+}
+
+.comment-item {
+  padding: 0.75rem 1rem;
+}
+
+.comment-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.comment-text {
+  margin-top: 0.3rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chart-wrap {
+  height: 320px;
+}
+
+.wordcloud-canvas {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px dashed var(--border);
+  border-radius: 0.4rem;
+  background: #fbfdff;
+}
+
+#statusMessage {
+  min-height: 1.25rem;
+}
+
+.status-ok {
+  color: #157347;
+}
+
+.status-error {
+  color: #b02a37;
+}
+
+.status-info {
+  color: #0a58ca;
+}
+
+@media (max-width: 1199px) {
+  .comment-scroll {
+    max-height: 320px;
+  }
+}

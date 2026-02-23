@@ -1,0 +1,212 @@
+:root {
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --text-main: #152238;
+  --text-muted: #6b778c;
+  --border: #dce4ef;
+}
+
+body {
+  background: linear-gradient(120deg, #eef3ff 0%, #f8fafc 60%, #eef9f8 100%);
+  color: var(--text-main);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+}
+
+h2 + p {
+  margin-bottom: 0.75rem;
+}
+
+.app-navbar {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+}
+
+.auth-body {
+  min-height: 100vh;
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.stat-card .card-body {
+  padding: 0.85rem 1rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stat-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.panel-card {
+  min-height: 280px;
+}
+
+.comment-scroll {
+  max-height: none;
+  overflow: visible;
+}
+
+.comment-item {
+  padding: 0.75rem 1rem;
+}
+
+.comment-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.comment-text {
+  margin-top: 0.3rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chart-wrap {
+  height: 320px;
+}
+
+.wordcloud-canvas {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px dashed var(--border);
+  border-radius: 0.4rem;
+  background: #fbfdff;
+}
+
+#statusMessage,
+#userStatusMessage,
+#authMessage {
+  min-height: 1.25rem;
+}
+
+#globalAlert {
+  min-height: 1.25rem;
+}
+
+.status-ok,
+.auth-success {
+  color: #157347;
+}
+
+.status-error,
+.auth-error {
+  color: #b02a37;
+}
+
+.status-info,
+.auth-info {
+  color: #0a58ca;
+}
+
+@media (max-width: 1199px) {
+  .comment-scroll {
+    max-height: none;
+  }
+}
+
+/* Advanced admin analytics card styling */
+.panel-card {
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(22, 34, 58, 0.06);
+}
+
+.panel-card .card-header {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 255, 0.9));
+  border-bottom: 1px solid rgba(207, 216, 227, 0.9);
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.analytics-grid > .card {
+  margin-bottom: 0;
+}
+
+.comment-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.sentiment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.sentiment-positive {
+  color: #1f7a36;
+  background: rgba(47, 158, 68, 0.16);
+}
+
+.sentiment-negative {
+  color: #b42323;
+  background: rgba(224, 49, 49, 0.15);
+}
+
+.sentiment-neutral {
+  color: #8a6708;
+  background: rgba(241, 196, 15, 0.2);
+}
+
+@media (max-width: 1199px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .chart-wrap {
+    height: 280px;
+  }
+}
+
+.export-actions {
+  border-top: 1px solid rgba(207, 216, 227, 0.8);
+  padding-top: 0.75rem;
+}
+
+.btn-official-report {
+  letter-spacing: 0.01em;
+  border-width: 1.5px;
+}
+
+.btn-export-data {
+  min-width: 124px;
+}
+
+.admin-control-card,
+.admin-topic-card {
+  border-radius: 0.75rem;
+}
+
+.admin-control-btn {
+  min-height: 46px;
+  font-weight: 600;
+}

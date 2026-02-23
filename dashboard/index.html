@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Sentiment Analysis</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="container-fluid py-4">
+    <header class="mb-4">
+      <h1 class="h3 mb-1">Admin Dashboard</h1>
+      <p class="text-muted mb-0">Sentiment, analytics, summarization, and word cloud</p>
+    </header>
+
+    <section class="card shadow-sm mb-4">
+      <div class="card-body">
+        <div class="row g-3 align-items-end">
+          <div class="col-12 col-md-3">
+            <label for="apiBaseInput" class="form-label">API Base URL</label>
+            <input id="apiBaseInput" class="form-control" value="http://127.0.0.1:5000" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="tokenInput" class="form-label">Admin JWT Token</label>
+            <input id="tokenInput" class="form-control" placeholder="Paste Bearer token here" />
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="topicSelect" class="form-label">Topic</label>
+            <select id="topicSelect" class="form-select"></select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label for="roleSelect" class="form-label">Role Filter</label>
+            <select id="roleSelect" class="form-select">
+              <option value="">All</option>
+              <option value="citizen">Citizen</option>
+              <option value="expert">Expert</option>
+            </select>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <button id="loadTopicsBtn" class="btn btn-outline-primary">Load Topics</button>
+          <button id="refreshBtn" class="btn btn-primary">Refresh Dashboard</button>
+          <button id="analyzeBtn" class="btn btn-success">Analyze Sentiment</button>
+          <button id="summarizeBtn" class="btn btn-warning">Summarize</button>
+          <button id="wordCloudBtn" class="btn btn-info text-white">Generate Word Cloud</button>
+        </div>
+        <div id="statusMessage" class="small mt-3"></div>
+      </div>
+    </section>
+
+    <section class="row g-3 mb-4">
+      <div class="col-6 col-lg-2">
+        <div class="card stat-card">
+          <div class="card-body">
+            <div class="stat-label">Total Comments</div>
+            <div id="totalCommentsCount" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="card stat-card">
+          <div class="card-body">
+            <div class="stat-label">Analyzed</div>
+            <div id="analyzedCount" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="card stat-card">
+          <div class="card-body">
+            <div class="stat-label">Pending</div>
+            <div id="pendingCount" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="card stat-card">
+          <div class="card-body">
+            <div class="stat-label">Positive</div>
+            <div id="positiveCount" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="card stat-card">
+          <div class="card-body">
+            <div class="stat-label">Neutral</div>
+            <div id="neutralCount" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="card stat-card">
+          <div class="card-body">
+            <div class="stat-label">Negative</div>
+            <div id="negativeCount" class="stat-value">0</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="row g-3">
+      <div class="col-12 col-xl-5">
+        <div class="card shadow-sm panel-card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span>Comments (10 per page)</span>
+            <div class="btn-group btn-group-sm">
+              <button id="prevPageBtn" class="btn btn-outline-secondary">Prev</button>
+              <button id="nextPageBtn" class="btn btn-outline-secondary">Next</button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div id="commentsList" class="list-group list-group-flush comment-scroll"></div>
+          </div>
+          <div class="card-footer small text-muted">
+            Page <span id="pageIndicator">1</span> of <span id="totalPagesIndicator">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-xl-7">
+        <div class="card shadow-sm mb-3 panel-card">
+          <div class="card-header">Sentiment Distribution</div>
+          <div class="card-body chart-wrap">
+            <canvas id="sentimentChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card shadow-sm mb-3 panel-card">
+          <div class="card-header">Summary</div>
+          <div class="card-body">
+            <p id="summaryText" class="mb-0 text-muted">Summary will appear here.</p>
+          </div>
+        </div>
+
+        <div class="card shadow-sm panel-card">
+          <div class="card-header">Word Cloud</div>
+          <div class="card-body">
+            <canvas id="wordCloudCanvas" class="wordcloud-canvas" width="900" height="360"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.3/src/wordcloud2.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
