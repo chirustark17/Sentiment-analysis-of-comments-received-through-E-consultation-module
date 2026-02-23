@@ -1,4 +1,5 @@
-### Developed & Engineered with ❤️by Stark(CHIRAG K S)
+### `Developed & Engineered by Stark (Chirag K S)`  
+`Built with precision & passion. Driven by purpose.`
 # MCA E-Consultation Sentiment Analysis Platform
 
 A full-stack public consultation system for collecting topic-wise citizen/expert feedback and generating admin-facing sentiment analytics, summaries, and word-frequency insights.
